@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { handleRegistration } from '../../../asset/axios/axiosApi';
+import { callPostApi } from '../../../asset/axios/axiosApi';
 import { useNavigate } from 'react-router-dom';
 import TextField from '../../../Component/TextField';
 
@@ -23,7 +23,7 @@ function Registration() {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    const registrater: any = await handleRegistration(formData);
+    const registrater: any = await callPostApi('/user/create', formData);
 
     if (registrater?.status) {
       navigate('/')

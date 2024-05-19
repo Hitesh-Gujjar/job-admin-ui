@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { handleLoginAPi } from "../../../asset/axios/axiosApi";
 import { Link, useNavigate } from "react-router-dom";
 import TextField from "../../../Component/TextField";
+import { callPostApi } from "../../../asset/axios/axiosApi";
 
 function Login() {
     const navigate = useNavigate();
@@ -11,8 +11,10 @@ function Login() {
     });
 
     const handleLogin = async () => {
-        const isLogin: any = await handleLoginAPi(userDetails);
+        const isLogin: any = await callPostApi('/user/login', userDetails);
         if (isLogin.status) {
+            const token = isLogin.data.token;
+            localStorage.setItem('job-token', token);
             navigate('/');
         }
     };

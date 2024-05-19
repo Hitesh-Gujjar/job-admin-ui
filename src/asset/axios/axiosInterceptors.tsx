@@ -12,9 +12,10 @@ api.interceptors.request.use(
         if (!config.headers) {
             config.headers = {};
         }
+        const isUser = localStorage.getItem('job-token');
 
         // Add common headers here if needed
-        config.headers['Authorization'] = 'Bearer your_access_token';
+        config.headers['Authorization'] = `Bearer ${isUser}`;
         return config;
     },
     (error: AxiosError) => {
