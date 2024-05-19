@@ -16,22 +16,41 @@ const callGetApi = async ({ url }: callGetApiTypes) => {
     return data;
 }
 
-const loginApi = axios.create({
+const callPostApi = async ({ url }: callGetApiTypes) => {
+    const data = await api.post(url);
+
+    return data;
+}
+
+const withouteToken = axios.create({
     baseURL: 'http://localhost:5000/job-portal/admin',
     timeout: 5000,
 });
 
 // Function to perform login and obtain a token
 export const handleLoginAPi = async (data: any): Promise<string | null> => {
+    debugger
     try {
-        const response = await loginApi.post('/user/login', data);
+        const response:any = await withouteToken.post('/user/login', data);
         const token = response.data.token;
-        localStorage.setItem('token', token);
-        return token;
+        localStorage.setItem('job-token', token);
+        return response;
     } catch (error) {
         console.error('Login error:', error);
         return null;
     }
 };
 
-export { callGetApi }
+// Function to perform login and obtain a token
+export const handleRegistration = async (data: any): Promise<string | null> => {
+    try {
+        const response: any = await withouteToken.post('/user/create', data);
+
+        return response;
+    } catch (error) {
+        console.error('Login error:', error);
+        return null;
+    }
+};
+
+export { callGetApi, callPostApi }
