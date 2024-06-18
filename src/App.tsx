@@ -8,6 +8,9 @@ import Career from './Pages/Career/Career';
 import ProtectedRoute from './Component/ProtectedRoute ';
 import Dashboard from './Pages/Dashboard/Dashboard';
 import Layout from './Component/Layout';
+import JobList from './Pages/Jobs/JobList';
+import CreateJob from './Pages/Jobs/Partial/CreateJob';
+
 
 function App() {
 
@@ -29,12 +32,18 @@ function App() {
         {
           path: "/",
           element: <Dashboard />,
-          // loader: teamLoader,
+        },
+        {
+          path: "/job-list",
+          element: <JobList />,
+        },
+        {
+          path: "/create-job",
+          element: <CreateJob />,
         },
         {
           path: "career",
           element: <Career />,
-          // loader: teamLoader,
         },
       ],
     }

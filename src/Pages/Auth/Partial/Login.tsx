@@ -12,7 +12,8 @@ function Login() {
 
     const handleLogin = async () => {
         const isLogin: any = await callPostApi('/user/login', userDetails);
-        if (isLogin.status) {
+        console.log("isLogin",isLogin)
+        if (isLogin.data.staus) {
             const token = isLogin.data.token;
             localStorage.setItem('job-token', token);
             navigate('/');
