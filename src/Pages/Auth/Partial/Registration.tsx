@@ -9,7 +9,7 @@ function Registration() {
     company_name: '',
     company_contact: '',
     company_email: '',
-    company_userId: '',
+    company_uername: '',
     password: '',
   });
 
@@ -22,11 +22,12 @@ function Registration() {
   };
 
   const handleSubmit = async (e: any) => {
+    debugger
     e.preventDefault();
     const registrater: any = await callPostApi('/user/create', formData);
 
-    if (registrater?.status) {
-      navigate('/')
+    if (registrater?.data?.status) {
+      navigate('/sign-in')
     }
   };
   return (
@@ -68,12 +69,12 @@ function Registration() {
             />
           </div>
           <div className="mb-4">
-            <label htmlFor="company_userId" className="block text-gray-700 font-bold mb-2">Company User ID</label>
+            <label htmlFor="company_uername" className="block text-gray-700 font-bold mb-2">Company User ID</label>
             <TextField
-              id="company_userId"
-              name="company_userId"
+              id="company_uername"
+              name="company_uername"
               type="text"
-              value={formData.company_userId}
+              value={formData.company_uername}
               handleOnChange={handleChange}
               required={true}
             />
