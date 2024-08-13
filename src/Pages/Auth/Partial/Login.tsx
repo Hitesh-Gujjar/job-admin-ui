@@ -12,10 +12,11 @@ function Login() {
 
     const handleLogin = async () => {
         const isLogin: any = await callPostApi('/user/login', userDetails);
-        console.log("isLogin",isLogin)
+
         if (isLogin.data.staus) {
-            const token = isLogin.data.token;
-            localStorage.setItem('job-token', token);
+            const userData = isLogin.data;
+            localStorage.setItem("user", JSON.stringify(userData));
+
             navigate('/');
         }
     };

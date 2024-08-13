@@ -10,10 +10,14 @@ import Dashboard from './Pages/Dashboard/Dashboard';
 import Layout from './Component/Layout';
 import JobList from './Pages/Jobs/JobList';
 import CreateJob from './Pages/Jobs/Partial/CreateJob';
+import { callGetApi } from './asset/axios/axiosApi';
+import { getLocalStorage } from './Comman/Comman';
 
 
 function App() {
-
+  const user = getLocalStorage();
+  const ErrorPage = () => <div>Error loading data.</div>;
+console.log("user",user)
   const router = createBrowserRouter([
     {
       path: "/sign-in",
@@ -25,17 +29,16 @@ function App() {
     },
     {
       path: "/",
-      element: <ProtectedRoute
-        component={<Layout />}
-      />,
+      element: <ProtectedRoute component={<Layout />} />,
       children: [
-        {
-          path: "/",
-          element: <Dashboard />,
-        },
+
         {
           path: "/job-list",
           element: <JobList />,
+          loader: async ({ request, params }) => {
+            return await callGetApi({ url: `user/job/list/${user.data._id}` });
+          },
+          errorElement: <ErrorPage />,
         },
         {
           path: "/create-job",
