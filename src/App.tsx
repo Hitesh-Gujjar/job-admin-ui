@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { LoaderFunctionArgs, RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Auth from './Pages/Auth/Auth';
 import Registration from './Pages/Auth/Partial/Registration';
 import Career from './Pages/Career/Career';
@@ -37,7 +37,6 @@ function App() {
       path: "/",
       element: <ProtectedRoute component={<Layout />} />,
       children: [
-
         {
           path: "/job-list",
           element: <JobList />,
