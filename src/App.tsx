@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { LoaderFunctionArgs, RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Auth from './Pages/Auth/Auth';
 import Registration from './Pages/Auth/Partial/Registration';
 import Career from './Pages/Career/Career';
@@ -15,9 +15,9 @@ import { getLocalStorage } from './Comman/Comman';
 
 
 function App() {
-  const user = getLocalStorage();
+
   const ErrorPage = () => <div>Error loading data.</div>;
-console.log("user",user)
+
   const router = createBrowserRouter([
     {
       path: "/sign-in",
@@ -31,11 +31,11 @@ console.log("user",user)
       path: "/",
       element: <ProtectedRoute component={<Layout />} />,
       children: [
-
         {
           path: "/job-list",
           element: <JobList />,
-          loader: async ({ request, params }) => {
+          loader: async ({ request, params }: LoaderFunctionArgs) => {
+            const user = getLocalStorage();
             return await callGetApi({ url: `user/job/list/${user.data._id}` });
           },
           errorElement: <ErrorPage />,

@@ -1,5 +1,6 @@
 import React from 'react'
 import { Navigate, useNavigate } from 'react-router-dom';
+import { getLocalStorage } from '../Comman/Comman';
 
 interface ProtectedRouteType {
     component: any
@@ -7,11 +8,11 @@ interface ProtectedRouteType {
 
 function ProtectedRoute({ component }: ProtectedRouteType) {
 
-    const isUser = localStorage.getItem('job-token');
-    if (!isUser) {
+    const isUser = getLocalStorage();
+    if (!isUser.token) {
         return <Navigate to="/sign-in" replace />;
     }
-    
+
     return component
 
 }
