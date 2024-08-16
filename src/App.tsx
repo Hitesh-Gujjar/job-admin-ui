@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
@@ -12,12 +12,18 @@ import JobList from './Pages/Jobs/JobList';
 import CreateJob from './Pages/Jobs/Partial/CreateJob';
 import { callGetApi } from './asset/axios/axiosApi';
 import { getLocalStorage } from './Comman/Comman';
+import { useDispatch, useSelector } from 'react-redux';
+
 
 
 function App() {
-  const user = getLocalStorage();
+
+  const dispatch = useDispatch();
+  const state: any = useSelector((state: any) => state)
   const ErrorPage = () => <div>Error loading data.</div>;
-console.log("user",user)
+
+
+
   const router = createBrowserRouter([
     {
       path: "/sign-in",
@@ -36,7 +42,8 @@ console.log("user",user)
           path: "/job-list",
           element: <JobList />,
           loader: async ({ request, params }) => {
-            return await callGetApi({ url: `user/job/list/${user.data._id}` });
+            const user = getLocalStorage();
+            return await callGetApi({ url: `user/job/list/${user?.data?._id}` });
           },
           errorElement: <ErrorPage />,
         },

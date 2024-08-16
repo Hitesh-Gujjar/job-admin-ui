@@ -2,7 +2,7 @@ import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
 import { getLocalStorage } from "../../Comman/Comman";
 
 const api = axios.create({
-  baseURL: "http://localhost:5000/job-portal/admin",
+  baseURL: "https://job-backend-mauve.vercel.app/job-portal/admin",
   timeout: 5000, // Adjust timeout as needed
 });
 
@@ -25,19 +25,6 @@ api.interceptors.request.use(
   }
 );
 
-// // Response interceptor
-// api.interceptors.response.use(
-//   (response: AxiosResponse) => {
-//     // Handle successful response
-//     console.log("Response received:", response.data);
-//     return response;
-//   },
-//   (error: AxiosError) => {
-//     // Handle response error
-//     console.error("Response error:", error);
-//     return Promise.reject(error);
-//   }
-// );
 
 api.interceptors.response.use(
   response => {
@@ -49,6 +36,7 @@ api.interceptors.response.use(
       // Server responded with a status other than 2xx
       if (error.response.status === 401) {
         // Handle unauthorized errors (e.g., redirect to login)
+        localStorage.clear();
         console.log('Unauthorized! Redirecting to login...');
       } else if (error.response.status === 500) {
         // Handle server errors

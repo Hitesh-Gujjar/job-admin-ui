@@ -2,9 +2,12 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import TextField from "../../../Component/TextField";
 import { callPostApi } from "../../../asset/axios/axiosApi";
+import { useDispatch } from "react-redux";
+
 
 function Login() {
     const navigate = useNavigate();
+    const dispatch=useDispatch();
     const [userDetails, setUsetDetails] = useState<any>({
         userId: "",
         password: "",
