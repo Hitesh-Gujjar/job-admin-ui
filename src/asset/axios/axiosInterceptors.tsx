@@ -2,7 +2,7 @@ import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
 import { getLocalStorage } from "../../Comman/Comman";
 
 const api = axios.create({
-  baseURL: "https://job-backend-mauve.vercel.app/job-portal/admin",
+  baseURL: "https://job-backend-mauve.vercel.app/admin",
   timeout: 5000, // Adjust timeout as needed
 });
 

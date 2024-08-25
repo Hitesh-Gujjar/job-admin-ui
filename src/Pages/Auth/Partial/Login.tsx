@@ -7,14 +7,13 @@ import { useDispatch } from "react-redux";
 
 function Login() {
     const navigate = useNavigate();
-    const dispatch=useDispatch();
+    const dispatch = useDispatch();
     const [userDetails, setUsetDetails] = useState<any>({
         userId: "",
         password: "",
     });
 
     const handleLogin = async () => {
-
         const isLogin: any = await callPostApi('/user/login', userDetails);
 
         if (isLogin.data.staus) {
@@ -86,7 +85,6 @@ function Login() {
                                         });
                                     }}
                                 />
-
                             </div>
                         </div>
 
