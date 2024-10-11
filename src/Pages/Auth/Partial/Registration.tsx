@@ -10,6 +10,7 @@ function Registration() {
     company_name: "",
     company_contact: "",
     company_email: "",
+    company_uername:"",
     password: "",
   });
   const [fieldErrors, setFieldErrors] = useState<any>({});
@@ -124,6 +125,23 @@ function Registration() {
               required={true}
             />
             {fieldErrors.company_email && (<p className="pb-0 text-red-600">{fieldErrors?.company_email}</p>)}
+          </div>
+          <div className="mb-4">
+            <label
+              htmlFor="company_uername"
+              className="block text-gray-700 font-bold mb-2"
+            >
+              company uername
+            </label>
+            <TextField
+              id="company_uername"
+              name="company_uername"
+              type="text"
+              value={formData.company_uername}
+              handleOnChange={handleChange}
+              required={true}
+            />
+            {fieldErrors.company_uername && (<p className="pb-0 text-red-600">{fieldErrors?.company_uername}</p>)}
           </div>
           <div className="mb-4">
             <label
