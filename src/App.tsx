@@ -22,8 +22,6 @@ function App() {
   const state: any = useSelector((state: any) => state)
   const ErrorPage = () => <div>Error loading data.</div>;
 
-
-
   const router = createBrowserRouter([
     {
       path: "/sign-in",
