@@ -1,7 +1,8 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
 import { getLocalStorage } from "../../Comman/Comman";
 
-const URL = process.env.REACT_APP_BASE_URL_ADMIN || 'http://localhost:8000/admin';
+const URL = process.env.REACT_APP_BASE_URL_ADMIN_VERCEL ||"https://job-backend-mauve.vercel.app/admin"
+//  "http://localhost:8000/admin" 
 const URLS="https://job-backend-mauve.vercel.app/admin"
 
 const api = axios.create({
