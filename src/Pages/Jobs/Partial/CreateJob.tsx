@@ -22,6 +22,7 @@ const CreateJob: React.FC = () => {
     description_company: "",
     key_skill: "",
   });
+  const [formError, setFormError]=useState({})
 
   const handleChange = (e: any) => {
     const { name, value, type, checked } = e.target;
@@ -33,10 +34,13 @@ const CreateJob: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const createJob = await callPostApi('user/job/create', formData);
+    const createJob:any = await callPostApi('user/job/create', formData);
 
-    if (createJob.status) {
+    if (createJob?.status === "true") {
       navigate("/job-list");
+    }else{
+      console.log('...',createJob?.data)
+      setFormError(createJob.data.error);
     }
   };
 
@@ -137,7 +141,7 @@ const CreateJob: React.FC = () => {
   ]
 
 
-  console.log("formData", formData)
+  console.log("formData", formError)
   return (
     <>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

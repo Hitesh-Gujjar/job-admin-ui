@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { LoaderFunctionArgs, RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { LoaderFunctionArgs, RouterProvider, createBrowserRouter, useNavigate } from 'react-router-dom';
 import Auth from './Pages/Auth/Auth';
 import Registration from './Pages/Auth/Partial/Registration';
 import Career from './Pages/Career/Career';
@@ -57,9 +57,7 @@ function App() {
   ]);
 
   return (
-    <>
-      <RouterProvider router={router} />
-    </>
+    <RouterProvider router={router} />
   );
 }
 

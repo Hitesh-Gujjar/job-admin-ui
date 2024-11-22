@@ -1,9 +1,8 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
 import { getLocalStorage } from "../../Comman/Comman";
 
-const URL = process.env.REACT_APP_BASE_URL_ADMIN_VERCEL ||"https://job-backend-mauve.vercel.app/admin"
-//  "http://localhost:8000/admin" 
-const URLS="https://job-backend-mauve.vercel.app/admin"
+const URL = process.env.REACT_APP_BASE_URL_ADMIN_VERCEL || "https://job-backend-mauve.vercel.app/admin"
+// const URL = process.env.REACT_APP_BASE_URL_ADMIN_LOCAL || "http://localhost:8000/admin";
 
 const api = axios.create({
   baseURL: URL,
@@ -14,14 +13,14 @@ api.interceptors.request.use(
   ({ ...config }: any) => {
 
     const isUser = getLocalStorage();
-
     if (isUser) {
       // Add common headers here if needed
       config.headers["Authorization"] = `Bearer ${isUser.token}`;
     }
-
+    
     return config;
   },
+
   (error: AxiosError) => {
     // Handle request error
     console.error("Request error:", error);
@@ -35,6 +34,7 @@ api.interceptors.response.use(
     return response;
   },
   error => {
+    console.log("error",error)
     // Handle errors globally
     if (error.response) {
       // Server responded with a status other than 2xx
